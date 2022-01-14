@@ -15,7 +15,7 @@ class LastIndicator extends StatelessWidget {
         }
       },
       child: const Padding(
-        padding: EdgeInsets.only(top: 12, bottom: 16),
+        padding: EdgeInsets.only(top: 12, bottom: 12),
         child: CupertinoActivityIndicator(),
       ),
     );

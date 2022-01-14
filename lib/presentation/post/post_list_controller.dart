@@ -50,7 +50,7 @@ class PostListController extends StateNotifier<PostListState> {
     _fetch(loadMore: true);
   }
 
-  void setQuery(String value) async {
+  void setQuery(String? value) async {
     if (state.query == value) {
       return;
     }

@@ -8,25 +8,28 @@ class PostContent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Padding(
-          padding: const EdgeInsets.all(8),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              _headerArea(),
-              const SizedBox(height: 4),
-              _titleArea(),
-              const SizedBox(height: 4),
-              _tagsArea(),
-              const SizedBox(height: 8),
-              _likesCountArea(),
-            ],
+    return Container(
+      color: Colors.white,
+      child: Column(
+        children: [
+          Padding(
+            padding: const EdgeInsets.all(8),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                _headerArea(),
+                const SizedBox(height: 4),
+                _titleArea(),
+                const SizedBox(height: 4),
+                _tagsArea(),
+                const SizedBox(height: 8),
+                _likesCountArea(),
+              ],
+            ),
           ),
-        ),
-        const Divider(height: 0),
-      ],
+          const Divider(height: 0),
+        ],
+      ),
     );
   }
 
