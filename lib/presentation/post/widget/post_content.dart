@@ -51,17 +51,6 @@ class PostContent extends StatelessWidget {
             },
           ),
         ),
-        // Container(
-        //   width: 32,
-        //   height: 32,
-        //   decoration: BoxDecoration(
-        //     shape: BoxShape.circle,
-        //     image: DecorationImage(
-        //       fit: BoxFit.fill,
-        //       image: NetworkImage(post.user.profileImageUrl),
-        //     ),
-        //   ),
-        // ),
         const SizedBox(width: 4),
         Expanded(
           child: Row(
@@ -92,7 +81,7 @@ class PostContent extends StatelessWidget {
       maxLines: 2,
       overflow: TextOverflow.ellipsis,
       style: const TextStyle(
-        fontSize: 20,
+        fontSize: 18,
         fontWeight: FontWeight.bold,
       ),
     );

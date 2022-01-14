@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_qiita_client/presentation/base/base_page.dart';
 import 'package:flutter_qiita_client/presentation/common/widget/last_indicator.dart';
 import 'package:flutter_qiita_client/presentation/post/post_list_controller.dart';
 import 'package:flutter_qiita_client/presentation/post/state/post_list_state.dart';
@@ -45,16 +46,21 @@ class PostListPage extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final posts = state.posts;
 
-    return ListView.builder(
-      itemCount: posts.length + (state.hasNext ? 1 : 0),
-      itemBuilder: (context, index) {
-        if (index == posts.length && state.hasNext) {
-          return LastIndicator(
-              ref.read(postListControllerProvider.notifier).loadMore);
-        }
+    return PrimaryScrollController(
+      controller: ref.watch(postListScrollControllerProvider),
+      child: Scrollbar(
+        child: ListView.builder(
+          itemCount: posts.length + (state.hasNext ? 1 : 0),
+          itemBuilder: (context, index) {
+            if (index == posts.length && state.hasNext) {
+              return LastIndicator(
+                  ref.read(postListControllerProvider.notifier).loadMore);
+            }
 
-        return PostContent(posts[index]);
-      },
+            return PostContent(posts[index]);
+          },
+        ),
+      ),
     );
   }
 }
