@@ -22,15 +22,13 @@ class _$PostListStateTearOff {
       bool hasNext = false,
       int page = 1,
       String? query,
-      PageState pageState = const PageStateLoading(),
-      Widget? cachePage}) {
+      PageState pageState = const PageStateLoading()}) {
     return _PostListState(
       posts: posts,
       hasNext: hasNext,
       page: page,
       query: query,
       pageState: pageState,
-      cachePage: cachePage,
     );
   }
 }
@@ -45,7 +43,6 @@ mixin _$PostListState {
   int get page => throw _privateConstructorUsedError;
   String? get query => throw _privateConstructorUsedError;
   PageState get pageState => throw _privateConstructorUsedError;
-  Widget? get cachePage => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $PostListStateCopyWith<PostListState> get copyWith =>
@@ -62,8 +59,7 @@ abstract class $PostListStateCopyWith<$Res> {
       bool hasNext,
       int page,
       String? query,
-      PageState pageState,
-      Widget? cachePage});
+      PageState pageState});
 
   $PageStateCopyWith<$Res> get pageState;
 }
@@ -84,7 +80,6 @@ class _$PostListStateCopyWithImpl<$Res>
     Object? page = freezed,
     Object? query = freezed,
     Object? pageState = freezed,
-    Object? cachePage = freezed,
   }) {
     return _then(_value.copyWith(
       posts: posts == freezed
@@ -107,10 +102,6 @@ class _$PostListStateCopyWithImpl<$Res>
           ? _value.pageState
           : pageState // ignore: cast_nullable_to_non_nullable
               as PageState,
-      cachePage: cachePage == freezed
-          ? _value.cachePage
-          : cachePage // ignore: cast_nullable_to_non_nullable
-              as Widget?,
     ));
   }
 
@@ -134,8 +125,7 @@ abstract class _$PostListStateCopyWith<$Res>
       bool hasNext,
       int page,
       String? query,
-      PageState pageState,
-      Widget? cachePage});
+      PageState pageState});
 
   @override
   $PageStateCopyWith<$Res> get pageState;
@@ -159,7 +149,6 @@ class __$PostListStateCopyWithImpl<$Res>
     Object? page = freezed,
     Object? query = freezed,
     Object? pageState = freezed,
-    Object? cachePage = freezed,
   }) {
     return _then(_PostListState(
       posts: posts == freezed
@@ -182,10 +171,6 @@ class __$PostListStateCopyWithImpl<$Res>
           ? _value.pageState
           : pageState // ignore: cast_nullable_to_non_nullable
               as PageState,
-      cachePage: cachePage == freezed
-          ? _value.cachePage
-          : cachePage // ignore: cast_nullable_to_non_nullable
-              as Widget?,
     ));
   }
 }
@@ -198,8 +183,7 @@ class _$_PostListState implements _PostListState {
       this.hasNext = false,
       this.page = 1,
       this.query,
-      this.pageState = const PageStateLoading(),
-      this.cachePage});
+      this.pageState = const PageStateLoading()});
 
   @JsonKey()
   @override
@@ -215,12 +199,10 @@ class _$_PostListState implements _PostListState {
   @JsonKey()
   @override
   final PageState pageState;
-  @override
-  final Widget? cachePage;
 
   @override
   String toString() {
-    return 'PostListState(posts: $posts, hasNext: $hasNext, page: $page, query: $query, pageState: $pageState, cachePage: $cachePage)';
+    return 'PostListState(posts: $posts, hasNext: $hasNext, page: $page, query: $query, pageState: $pageState)';
   }
 
   @override
@@ -232,8 +214,7 @@ class _$_PostListState implements _PostListState {
             const DeepCollectionEquality().equals(other.hasNext, hasNext) &&
             const DeepCollectionEquality().equals(other.page, page) &&
             const DeepCollectionEquality().equals(other.query, query) &&
-            const DeepCollectionEquality().equals(other.pageState, pageState) &&
-            const DeepCollectionEquality().equals(other.cachePage, cachePage));
+            const DeepCollectionEquality().equals(other.pageState, pageState));
   }
 
   @override
@@ -243,8 +224,7 @@ class _$_PostListState implements _PostListState {
       const DeepCollectionEquality().hash(hasNext),
       const DeepCollectionEquality().hash(page),
       const DeepCollectionEquality().hash(query),
-      const DeepCollectionEquality().hash(pageState),
-      const DeepCollectionEquality().hash(cachePage));
+      const DeepCollectionEquality().hash(pageState));
 
   @JsonKey(ignore: true)
   @override
@@ -258,8 +238,7 @@ abstract class _PostListState implements PostListState {
       bool hasNext,
       int page,
       String? query,
-      PageState pageState,
-      Widget? cachePage}) = _$_PostListState;
+      PageState pageState}) = _$_PostListState;
 
   @override
   List<QiitaPost> get posts;
@@ -271,8 +250,6 @@ abstract class _PostListState implements PostListState {
   String? get query;
   @override
   PageState get pageState;
-  @override
-  Widget? get cachePage;
   @override
   @JsonKey(ignore: true)
   _$PostListStateCopyWith<_PostListState> get copyWith =>

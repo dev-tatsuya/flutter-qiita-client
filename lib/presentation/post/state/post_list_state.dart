@@ -1,4 +1,3 @@
-import 'package:flutter/material.dart';
 import 'package:flutter_qiita_client/domain/model/qiita_post.dart';
 import 'package:flutter_qiita_client/presentation/common/state/page_state.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
@@ -13,6 +12,5 @@ class PostListState with _$PostListState {
     @Default(1) int page,
     String? query,
     @Default(PageStateLoading()) PageState pageState,
-    Widget? cachePage,
   }) = _PostListState;
 }
