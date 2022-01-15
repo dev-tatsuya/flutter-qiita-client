@@ -15,5 +15,5 @@ class TagJson with _$TagJson {
   factory TagJson.fromJson(Map<String, dynamic> json) =>
       _$TagJsonFromJson(json);
 
-  Tag toEntity() => Tag(name, versions);
+  Tag toEntity() => Tag(name, versions: versions);
 }

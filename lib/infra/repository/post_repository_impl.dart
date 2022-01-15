@@ -6,7 +6,8 @@ import 'package:flutter_qiita_client/infra/service/api/network_exceptions.dart';
 import 'package:flutter_qiita_client/infra/service/api_service_impl.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-final postRepositoryProvider = Provider((ref) => PostRepositoryImpl(ref.read));
+final postRepositoryProvider =
+    Provider<PostRepository>((ref) => PostRepositoryImpl(ref.read));
 
 class PostRepositoryImpl implements PostRepository {
   PostRepositoryImpl(this._read);

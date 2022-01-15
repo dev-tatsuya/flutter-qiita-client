@@ -6,7 +6,8 @@ import 'package:flutter_qiita_client/infra/service/api/data_model/response/qiita
 import 'package:flutter_qiita_client/infra/service/api/qiita_api.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-final apiServiceProvider = Provider((ref) => ApiServiceImpl(ref.read));
+final apiServiceProvider =
+    Provider<ApiService>((ref) => ApiServiceImpl(ref.read));
 
 class ApiServiceImpl implements ApiService {
   ApiServiceImpl(this._read);

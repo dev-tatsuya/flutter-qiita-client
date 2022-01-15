@@ -17,7 +17,7 @@ class PostContent extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                _headerArea(),
+                _headerArea(context),
                 const SizedBox(height: 4),
                 _titleArea(),
                 const SizedBox(height: 4),
@@ -33,26 +33,33 @@ class PostContent extends StatelessWidget {
     );
   }
 
-  Widget _headerArea() {
+  Widget _headerArea(BuildContext context) {
     return Row(
       children: [
         ClipRRect(
           borderRadius: BorderRadius.circular(32),
-          child: Image.network(
-            post.user.profileImageUrl,
-            width: 32,
-            height: 32,
-            errorBuilder: (context, error, st) {
-              return Container(
-                width: 32,
-                height: 32,
-                decoration: BoxDecoration(
-                  borderRadius: const BorderRadius.all(Radius.circular(32)),
-                  border: Border.all(color: Colors.lightGreen),
+          child: post.user.profileImageUrl.isNotEmpty
+              ? Image.network(
+                  post.user.profileImageUrl,
+                  width: 32,
+                  height: 32,
+                  errorBuilder: (context, error, st) {
+                    return Container(
+                      width: 32,
+                      height: 32,
+                      decoration: BoxDecoration(
+                        borderRadius:
+                            const BorderRadius.all(Radius.circular(32)),
+                        border: Border.all(color: Colors.lightGreen),
+                      ),
+                    );
+                  },
+                )
+              : Image.asset(
+                  'assets/images/logo_flutter.png',
+                  width: 32,
+                  height: 32,
                 ),
-              );
-            },
-          ),
         ),
         const SizedBox(width: 4),
         Expanded(
@@ -63,13 +70,32 @@ class PostContent extends StatelessWidget {
                 child: Text(
                   '@${post.user.id}',
                   overflow: TextOverflow.ellipsis,
+                  style: const TextStyle(fontFamily: 'Inter'),
                 ),
               ),
               const SizedBox(width: 4),
-              Text(
-                '${post.createdAt.year}年'
-                '${post.createdAt.month}月'
-                '${post.createdAt.day}日作成',
+              RichText(
+                text: TextSpan(
+                  style:
+                      DefaultTextStyle.of(context).style.copyWith(fontSize: 13),
+                  children: [
+                    TextSpan(
+                      text: '${post.createdAt.year}',
+                      style: const TextStyle(fontFamily: 'Inter'),
+                    ),
+                    const TextSpan(text: '年'),
+                    TextSpan(
+                      text: '${post.createdAt.month}',
+                      style: const TextStyle(fontFamily: 'Inter'),
+                    ),
+                    const TextSpan(text: '月'),
+                    TextSpan(
+                      text: '${post.createdAt.day}',
+                      style: const TextStyle(fontFamily: 'Inter'),
+                    ),
+                    const TextSpan(text: '日作成'),
+                  ],
+                ),
               ),
             ],
           ),
@@ -124,7 +150,7 @@ class PostContent extends StatelessWidget {
         const SizedBox(width: 4),
         const Icon(Icons.thumb_up_outlined, size: 16),
         const SizedBox(width: 4),
-        Text('${post.likesCount}'),
+        Text('${post.likesCount}', style: const TextStyle(fontFamily: 'Inter')),
       ],
     );
   }

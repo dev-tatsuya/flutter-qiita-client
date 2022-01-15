@@ -25,7 +25,13 @@ class ConnectedPostListPage extends ConsumerWidget {
     return Scaffold(
       backgroundColor: const Color(0xfff8f8f8),
       appBar: AppBar(
-        title: const Text('Flutter Qiita Client'),
+        title: const Text(
+          'Flutter Qiita Client',
+          style: TextStyle(fontFamily: 'Inter'),
+        ),
+        centerTitle: true,
+        elevation: 1,
+        toolbarHeight: 44,
       ),
       body: state.pageState.when(
         success: () => _cacheWidget(PostListPage(state)),

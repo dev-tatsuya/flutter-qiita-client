@@ -10,6 +10,7 @@ class App extends StatelessWidget {
       title: 'Flutter Qiita Client',
       theme: ThemeData(
         primarySwatch: Colors.green,
+        fontFamily: 'Noto Sans JP',
       ),
       debugShowCheckedModeBanner: false,
       home: const BasePage(),

@@ -35,7 +35,7 @@ class _SearchFormState extends ConsumerState<SearchBar> {
               controller: controller..text = query ?? '',
               textInputAction: TextInputAction.search,
               style: const TextStyle(
-                fontSize: 16,
+                fontSize: 14,
                 fontWeight: FontWeight.w500,
               ),
               decoration: InputDecoration(
@@ -44,7 +44,7 @@ class _SearchFormState extends ConsumerState<SearchBar> {
                   borderSide: BorderSide.none,
                 ),
                 filled: true,
-                hintText: '検索ワードを入力',
+                hintText: 'キーワードを入力',
                 contentPadding: EdgeInsets.zero,
                 prefixIcon: const Icon(Icons.search),
                 suffixIcon: query?.isEmpty ?? true

@@ -12,6 +12,7 @@ class BasePage extends ConsumerWidget {
     return Scaffold(
       body: const ConnectedPostListPage(),
       bottomNavigationBar: BottomNavigationBar(
+        backgroundColor: Colors.white,
         items: const [
           BottomNavigationBarItem(
             label: '記事一覧',
