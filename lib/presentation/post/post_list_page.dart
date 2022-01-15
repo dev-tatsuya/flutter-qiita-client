@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_qiita_client/presentation/base/base_page.dart';
 import 'package:flutter_qiita_client/presentation/common/widget/last_indicator.dart';
-import 'package:flutter_qiita_client/presentation/common/widget/search_form.dart';
+import 'package:flutter_qiita_client/presentation/common/widget/search_bar.dart';
 import 'package:flutter_qiita_client/presentation/post/post_list_controller.dart';
 import 'package:flutter_qiita_client/presentation/post/state/post_list_state.dart';
 import 'package:flutter_qiita_client/presentation/post/widget/post_content.dart';
@@ -57,8 +57,8 @@ class PostListPage extends ConsumerWidget {
               floating: true,
               elevation: 0.5,
               bottom: PreferredSize(
-                preferredSize: Size.fromHeight(12),
-                child: SearchForm(),
+                preferredSize: Size.fromHeight(4),
+                child: SearchBar(),
               ),
             ),
             CupertinoSliverRefreshControl(

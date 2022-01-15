@@ -2,29 +2,20 @@ import 'package:flutter/material.dart';
 import 'package:flutter_qiita_client/presentation/post/post_list_controller.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-class SearchForm extends ConsumerStatefulWidget {
-  const SearchForm({Key? key}) : super(key: key);
+class SearchBar extends ConsumerStatefulWidget {
+  const SearchBar({Key? key}) : super(key: key);
 
   @override
   _SearchFormState createState() => _SearchFormState();
 }
 
-class _SearchFormState extends ConsumerState<SearchForm> {
-  final controller = TextEditingController();
-  final focusNode = FocusNode();
+class _SearchFormState extends ConsumerState<SearchBar> {
+  late TextEditingController controller;
 
   @override
   void initState() {
     super.initState();
-    focusNode.addListener(_onFocusChange);
-  }
-
-  void _onFocusChange() {
-    if (!focusNode.hasFocus) {
-      ref.read(postListControllerProvider.notifier)
-        ..setPage(1)
-        ..setQuery(controller.text.isEmpty ? null : controller.text);
-    }
+    controller = TextEditingController();
   }
 
   @override
@@ -34,15 +25,15 @@ class _SearchFormState extends ConsumerState<SearchForm> {
     return Stack(
       alignment: Alignment.center,
       children: [
-        Container(height: 68, color: Colors.white),
+        Container(height: 60, color: Colors.white),
         SizedBox(
           width: double.infinity,
-          height: 44,
+          height: 40,
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 12),
             child: TextField(
-              focusNode: focusNode,
               controller: controller..text = query ?? '',
+              textInputAction: TextInputAction.search,
               style: const TextStyle(
                 fontSize: 16,
                 fontWeight: FontWeight.w500,
@@ -54,7 +45,7 @@ class _SearchFormState extends ConsumerState<SearchForm> {
                 ),
                 filled: true,
                 hintText: '検索ワードを入力',
-                contentPadding: const EdgeInsets.symmetric(vertical: 0),
+                contentPadding: EdgeInsets.zero,
                 prefixIcon: const Icon(Icons.search),
                 suffixIcon: query?.isEmpty ?? true
                     ? null
@@ -67,8 +58,11 @@ class _SearchFormState extends ConsumerState<SearchForm> {
                         child: const Icon(Icons.clear),
                       ),
               ),
-              onSubmitted: (value) => FocusScope.of(context).unfocus(),
-              textInputAction: TextInputAction.search,
+              onSubmitted: (value) {
+                ref.read(postListControllerProvider.notifier)
+                  ..setPage(1)
+                  ..setQuery(value.isEmpty ? null : value);
+              },
             ),
           ),
         ),
