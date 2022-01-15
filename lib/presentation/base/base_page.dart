@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_qiita_client/presentation/post/post_list_page.dart';
+import 'package:flutter_qiita_client/presentation/post/connected_post_list_page.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 final postListScrollControllerProvider = Provider((ref) => ScrollController());

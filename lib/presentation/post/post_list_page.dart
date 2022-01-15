@@ -8,42 +8,6 @@ import 'package:flutter_qiita_client/presentation/post/state/post_list_state.dar
 import 'package:flutter_qiita_client/presentation/post/widget/post_content.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-class ConnectedPostListPage extends ConsumerWidget {
-  const ConnectedPostListPage({Key? key}) : super(key: key);
-
-  static Widget? _lastCachedChild;
-
-  Widget _cacheWidget(Widget child) {
-    _lastCachedChild = child;
-    return child;
-  }
-
-  @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final state = ref.watch(postListControllerProvider);
-
-    return Scaffold(
-      backgroundColor: const Color(0xfff8f8f8),
-      appBar: AppBar(
-        title: const Text(
-          'Flutter Qiita Client',
-          style: TextStyle(fontFamily: 'Inter'),
-        ),
-        centerTitle: true,
-        elevation: 1,
-        toolbarHeight: 44,
-      ),
-      body: state.pageState.when(
-        success: () => _cacheWidget(PostListPage(state)),
-        loading: () =>
-            _lastCachedChild ??
-            const Center(child: CupertinoActivityIndicator()),
-        error: (error) => _cacheWidget(Center(child: Text(error.toString()))),
-      ),
-    );
-  }
-}
-
 class PostListPage extends ConsumerWidget {
   const PostListPage(this.state, {Key? key}) : super(key: key);
 
