@@ -10,3 +10,17 @@ class ApiResponse<T> with _$ApiResponse<T> {
       ApiFailureResponse<T>;
   const factory ApiResponse.empty() = ApiEmptyResponse<T>;
 }
+
+extension ApiResponseExt on ApiResponse {
+  T safeValue<T>() => maybeWhen<T>(
+        success: (data) => data,
+        failure: (error) => throw error,
+        orElse: () => throw const UnexpectedError(),
+      );
+
+  void safeVoid() => maybeWhen(
+        empty: () {},
+        failure: (error) => throw error,
+        orElse: () => throw const UnexpectedError(),
+      );
+}

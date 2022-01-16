@@ -10,8 +10,6 @@ import 'package:flutter_qiita_client/domain/repository/post_repository.dart'
 import 'package:flutter_qiita_client/domain/service/api_service.dart' as _i6;
 import 'package:flutter_qiita_client/infra/service/api/api_response.dart'
     as _i2;
-import 'package:flutter_qiita_client/infra/service/api/data_model/response/qiita_post_response.dart'
-    as _i7;
 import 'package:mockito/mockito.dart' as _i1;
 
 // ignore_for_file: avoid_redundant_argument_values
@@ -52,13 +50,12 @@ class MockApiService extends _i1.Mock implements _i6.ApiService {
   }
 
   @override
-  _i4.Future<_i2.ApiResponse<List<_i7.QiitaPostResponse>>> getItems(
+  _i4.Future<_i2.ApiResponse<List<_i5.QiitaPost>>> getItems(
           {int? page, int? perPage, String? query}) =>
       (super.noSuchMethod(
           Invocation.method(
               #getItems, [], {#page: page, #perPage: perPage, #query: query}),
-          returnValue:
-              Future<_i2.ApiResponse<List<_i7.QiitaPostResponse>>>.value(
-                  _FakeApiResponse_0<List<_i7.QiitaPostResponse>>())) as _i4
-          .Future<_i2.ApiResponse<List<_i7.QiitaPostResponse>>>);
+          returnValue: Future<_i2.ApiResponse<List<_i5.QiitaPost>>>.value(
+              _FakeApiResponse_0<List<_i5.QiitaPost>>())) as _i4
+          .Future<_i2.ApiResponse<List<_i5.QiitaPost>>>);
 }
