@@ -9,15 +9,12 @@ final apiResponseFactoryProvider =
     Provider<ApiResponseFactory>((ref) => ApiResponseFactory());
 
 class ApiResponseFactory {
-  Future<ApiResponse<S>> apiCall<T, S>({
-    required Future<HttpResponse<T>> api,
-    required S Function(T) builder,
-  }) async {
+  Future<ApiResponse<T>> apiCall<T>(Future<HttpResponse<T>> api) async {
     try {
-      final apiRes = await api;
-      final res = apiRes.response;
+      final _response = await api;
+      final res = _response.response;
       if (_isSuccessful(res.statusCode)) {
-        return ApiSuccessResponse(builder(apiRes.data));
+        return ApiSuccessResponse(_response.data);
       }
 
       return handleExpectedException(res);

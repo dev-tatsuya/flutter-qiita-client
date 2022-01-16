@@ -1,5 +1,4 @@
 import 'package:flutter_dotenv/flutter_dotenv.dart';
-import 'package:flutter_qiita_client/domain/model/qiita_post.dart';
 import 'package:flutter_qiita_client/domain/service/api_service.dart';
 import 'package:flutter_qiita_client/infra/service/api/api_response.dart';
 import 'package:flutter_qiita_client/infra/service/api/api_response_factory.dart';
@@ -18,20 +17,17 @@ class ApiServiceImpl implements ApiService {
   ApiResponseFactory get _factory => _read(apiResponseFactoryProvider);
 
   @override
-  Future<ApiResponse<List<QiitaPost>>> getItems({
+  Future<ApiResponse<List<QiitaPostResponse>>> getItems({
     int? page,
     int? perPage,
     String? query,
   }) async {
-    return _factory.apiCall(
-        api: _api.getItems(
-          header: _bearerToken,
-          page: page,
-          perPage: perPage,
-          query: query,
-        ),
-        builder: (List<QiitaPostResponse> list) =>
-            list.map((e) => e.toEntity()).toList());
+    return _factory.apiCall(_api.getItems(
+      header: _bearerToken,
+      page: page,
+      perPage: perPage,
+      query: query,
+    ));
   }
 
   final _bearerToken = 'Bearer ${dotenv.env['access_token']}';
