@@ -9,6 +9,8 @@ class BasePage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final controller = ref.read(postListScrollControllerProvider);
+
     return Scaffold(
       body: const ConnectedPostListPage(),
       bottomNavigationBar: BottomNavigationBar(
@@ -24,12 +26,12 @@ class BasePage extends ConsumerWidget {
           ),
         ],
         onTap: (index) {
-          if (ref.read(postListScrollControllerProvider).hasClients) {
-            ref.read(postListScrollControllerProvider).animateTo(
-                  0,
-                  duration: const Duration(milliseconds: 300),
-                  curve: Curves.easeOut,
-                );
+          if (controller.hasClients) {
+            controller.animateTo(
+              0,
+              duration: const Duration(milliseconds: 300),
+              curve: Curves.easeOut,
+            );
           }
         },
       ),
