@@ -36,7 +36,7 @@ void main() {
         perPage: PostListController.perPage,
       )).thenAnswer((_) async => mockQiitaPosts);
 
-      final future = target.fetch();
+      final future = target.fetch(showDialog: true);
       expect(target.debugState.posts, isEmpty);
       expect(target.debugState.pageState, const PageStateLoading());
       await future;
@@ -45,7 +45,7 @@ void main() {
     });
 
     test('succeed when page status is empty', () async {
-      final future = target.fetch();
+      final future = target.fetch(showDialog: true);
       expect(target.debugState.posts, isEmpty);
       expect(target.debugState.pageState, const PageStateLoading());
       await future;
