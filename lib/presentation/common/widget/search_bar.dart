@@ -6,10 +6,10 @@ class SearchBar extends ConsumerStatefulWidget {
   const SearchBar({Key? key}) : super(key: key);
 
   @override
-  _SearchFormState createState() => _SearchFormState();
+  SearchFormState createState() => SearchFormState();
 }
 
-class _SearchFormState extends ConsumerState<SearchBar> {
+class SearchFormState extends ConsumerState<SearchBar> {
   late TextEditingController controller;
 
   @override

@@ -11,10 +11,10 @@ final apiResponseFactoryProvider =
 class ApiResponseFactory {
   Future<ApiResponse<T>> apiCall<T>(Future<HttpResponse<T>> api) async {
     try {
-      final _response = await api;
-      final res = _response.response;
+      final response = await api;
+      final res = response.response;
       if (_isSuccessful(res.statusCode)) {
-        return ApiSuccessResponse(_response.data);
+        return ApiSuccessResponse(response.data);
       }
 
       return handleExpectedException(res);

@@ -35,76 +35,76 @@ class NetworkExceptions with _$NetworkExceptions {
   static NetworkExceptions getDioException(Object error, {String? message}) {
     if (error is Exception) {
       try {
-        NetworkExceptions networkExceptions;
+        NetworkExceptions? networkExceptions;
         if (error is DioError) {
+          switch (error.response?.statusCode) {
+            case 400:
+              networkExceptions = NetworkExceptions.badRequest(reason: message);
+              break;
+            case 401:
+              networkExceptions =
+                  NetworkExceptions.unauthorisedRequest(reason: message);
+              break;
+            case 403:
+              networkExceptions = NetworkExceptions.forbidden(reason: message);
+              break;
+            case 404:
+              networkExceptions = NetworkExceptions.notFound(reason: message);
+              break;
+            case 405:
+              networkExceptions =
+                  NetworkExceptions.methodNotAllowed(reason: message);
+              break;
+            case 408:
+              networkExceptions =
+                  NetworkExceptions.requestTimeout(reason: message);
+              break;
+            case 409:
+              networkExceptions = NetworkExceptions.conflict(reason: message);
+              break;
+            case 500:
+              networkExceptions =
+                  NetworkExceptions.internalServerError(reason: message);
+              break;
+            case 503:
+              networkExceptions =
+                  NetworkExceptions.serviceUnavailable(reason: message);
+              break;
+            default:
+              break;
+          }
           switch (error.type) {
             case DioErrorType.cancel:
               networkExceptions = const NetworkExceptions.requestCancelled();
               break;
-            case DioErrorType.connectTimeout:
+            case DioErrorType.connectionTimeout:
               networkExceptions = const NetworkExceptions.requestTimeout();
               break;
-            case DioErrorType.other:
+            case DioErrorType.unknown:
               networkExceptions = const NetworkExceptions.unauthorisedRequest();
               break;
             case DioErrorType.receiveTimeout:
               networkExceptions = const NetworkExceptions.sendTimeout();
               break;
-            case DioErrorType.response:
-              switch (error.response?.statusCode) {
-                case 400:
-                  networkExceptions =
-                      NetworkExceptions.badRequest(reason: message);
-                  break;
-                case 401:
-                  networkExceptions =
-                      NetworkExceptions.unauthorisedRequest(reason: message);
-                  break;
-                case 403:
-                  networkExceptions =
-                      NetworkExceptions.forbidden(reason: message);
-                  break;
-                case 404:
-                  networkExceptions =
-                      NetworkExceptions.notFound(reason: message);
-                  break;
-                case 405:
-                  networkExceptions =
-                      NetworkExceptions.methodNotAllowed(reason: message);
-                  break;
-                case 408:
-                  networkExceptions =
-                      NetworkExceptions.requestTimeout(reason: message);
-                  break;
-                case 409:
-                  networkExceptions =
-                      NetworkExceptions.conflict(reason: message);
-                  break;
-                case 500:
-                  networkExceptions =
-                      NetworkExceptions.internalServerError(reason: message);
-                  break;
-                case 503:
-                  networkExceptions =
-                      NetworkExceptions.serviceUnavailable(reason: message);
-                  break;
-                default:
-                  final responseCode = error.response?.statusCode;
-                  networkExceptions = NetworkExceptions.defaultError(
-                    reason: 'Received invalid status code: $responseCode',
-                  );
-              }
-              break;
             case DioErrorType.sendTimeout:
               networkExceptions = const NetworkExceptions.sendTimeout();
               break;
+            case DioErrorType.badCertificate:
+            case DioErrorType.badResponse:
+            case DioErrorType.connectionError:
+              break;
+            default:
+              final responseCode = error.response?.statusCode;
+              networkExceptions = NetworkExceptions.defaultError(
+                reason: 'Received invalid status code: $responseCode',
+              );
           }
         } else if (error is SocketException) {
           networkExceptions = const NetworkExceptions.noInternetConnection();
         } else {
           networkExceptions = const NetworkExceptions.unexpectedError();
         }
-        return networkExceptions;
+        return networkExceptions ?? const UnexpectedError();
       } on FormatException {
         return const NetworkExceptions.formatException();
       } on NetworkExceptions catch (_) {
