@@ -10,6 +10,6 @@ test:
 golden:
 	fvm flutter test --update-goldens $(path)
 
-.PHONY: build_runner
+.PHONY: build runner
 runner:
 	fvm flutter pub run build_runner watch --delete-conflicting-outputs

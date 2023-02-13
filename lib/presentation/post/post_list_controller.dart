@@ -7,12 +7,12 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 final postListControllerProvider =
-    StateNotifierProvider.autoDispose<PostListController, PostListState>(
+    StateNotifierProvider<PostListController, PostListState>(
         (ref) => PostListController(ref.read));
 
 class PostListController extends StateNotifier<PostListState> {
   PostListController(this._read) : super(const PostListState()) {
-    fetch();
+    fetch(showDialog: true);
   }
 
   @visibleForTesting
@@ -29,8 +29,11 @@ class PostListController extends StateNotifier<PostListState> {
   @visibleForTesting
   Future<void> fetch({
     bool loadMore = false,
+    bool showDialog = false,
   }) async {
-    state = state.copyWith(pageState: const PageStateLoading());
+    if (showDialog) {
+      state = state.copyWith(pageState: const PageStateLoading());
+    }
 
     try {
       final newItems = await _repo.fetch(
