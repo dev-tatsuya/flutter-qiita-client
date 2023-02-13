@@ -2,7 +2,7 @@ import 'package:flutter_qiita_client/domain/repository/post_repository.dart';
 import 'package:flutter_qiita_client/infra/repository/post_repository_impl.dart';
 import 'package:flutter_qiita_client/infra/service/api/network_exceptions.dart';
 import 'package:flutter_qiita_client/presentation/common/state/page_state.dart';
-import 'package:flutter_qiita_client/presentation/post/post_list_controller.dart';
+import 'package:flutter_qiita_client/presentation/post/post_list_notifier.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:mockito/mockito.dart';
@@ -11,7 +11,7 @@ import '../mock/mock.mocks.dart';
 import '../mock/model/qiita_post.dart';
 
 void main() {
-  late PostListController target;
+  late PostListNotifier target;
   late PostRepository postRepository;
 
   setUp(() {
@@ -23,17 +23,17 @@ void main() {
 
     when(postRepository.fetch(
       page: 1,
-      perPage: PostListController.perPage,
+      perPage: PostListNotifier.perPage,
     )).thenAnswer((_) async => []);
 
-    target = PostListController(container.read);
+    target = container.read(postListNotifierProvider.notifier);
   });
 
   group('fetch', () {
     test('succeed when page state is success', () async {
       when(postRepository.fetch(
         page: 1,
-        perPage: PostListController.perPage,
+        perPage: PostListNotifier.perPage,
       )).thenAnswer((_) async => mockQiitaPosts);
 
       final future = target.fetch(showDialog: true);
@@ -56,7 +56,7 @@ void main() {
     test('failed', () async {
       when(postRepository.fetch(
         page: 1,
-        perPage: PostListController.perPage,
+        perPage: PostListNotifier.perPage,
       )).thenThrow(const InternalServerError());
 
       await target.fetch();
@@ -75,7 +75,7 @@ void main() {
     expect(target.debugState.page, 1);
     when(postRepository.fetch(
       page: 2,
-      perPage: PostListController.perPage,
+      perPage: PostListNotifier.perPage,
     )).thenAnswer((_) async => []);
 
     verify(await target.fetch(loadMore: true)).called(1);
@@ -87,7 +87,7 @@ void main() {
     const keyword = 'test';
     when(postRepository.fetch(
       page: 1,
-      perPage: PostListController.perPage,
+      perPage: PostListNotifier.perPage,
       query: keyword,
     )).thenAnswer((_) async => []);
     expect(target.debugState.query, isNull);

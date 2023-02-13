@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_qiita_client/presentation/post/post_list_controller.dart';
+import 'package:flutter_qiita_client/presentation/post/post_list_notifier.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 class SearchBar extends ConsumerStatefulWidget {
@@ -20,7 +20,7 @@ class SearchFormState extends ConsumerState<SearchBar> {
 
   @override
   Widget build(BuildContext context) {
-    final query = ref.watch(postListControllerProvider).query;
+    final query = ref.watch(postListNotifierProvider).query;
 
     return Stack(
       alignment: Alignment.center,
@@ -51,7 +51,7 @@ class SearchFormState extends ConsumerState<SearchBar> {
                     ? null
                     : GestureDetector(
                         onTap: () {
-                          ref.read(postListControllerProvider.notifier)
+                          ref.read(postListNotifierProvider.notifier)
                             ..setPage(1)
                             ..setQuery(null);
                         },
@@ -59,7 +59,7 @@ class SearchFormState extends ConsumerState<SearchBar> {
                       ),
               ),
               onSubmitted: (value) {
-                ref.read(postListControllerProvider.notifier)
+                ref.read(postListNotifierProvider.notifier)
                   ..setPage(1)
                   ..setQuery(value.isEmpty ? null : value);
               },

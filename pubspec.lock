@@ -226,10 +226,10 @@ packages:
     dependency: "direct main"
     description:
       name: flutter_hooks
-      sha256: c32436445d490ed6c6c94099dd835ecdb8e6fed32d6dc0bc1c3c646b54257e25
+      sha256: "2b202559a4ed3656bbb7aae9d8b335fb0037b23acc7ae3f377d1ba0b95c21aec"
       url: "https://pub.dev"
     source: hosted
-    version: "0.18.2"
+    version: "0.18.5+1"
   flutter_lints:
     dependency: "direct dev"
     description:
@@ -247,10 +247,10 @@ packages:
     dependency: transitive
     description:
       name: flutter_riverpod
-      sha256: c57d053ca394a9f4ae3cb09654564700515c01ecf969e1bff0b5be479df4e3c4
+      sha256: "46a27b7a11dc13738054093076f2dc65692ddcd463979b15092accf5681aea20"
       url: "https://pub.dev"
     source: hosted
-    version: "1.0.3"
+    version: "2.2.0"
   flutter_test:
     dependency: "direct dev"
     description: flutter
@@ -308,10 +308,10 @@ packages:
     dependency: "direct main"
     description:
       name: hooks_riverpod
-      sha256: "823e47bc9515d1660c7f8e700bf9b8bb14d3eb32efecce103bec6ca605c243f3"
+      sha256: a596bcb1eaf48eae6da1ce8b9e60ec9538ef7d15725e941c3626f29dfcc01d96
       url: "https://pub.dev"
     source: hosted
-    version: "1.0.3"
+    version: "2.2.0"
   http:
     dependency: "direct main"
     description:
@@ -500,10 +500,10 @@ packages:
     dependency: transitive
     description:
       name: riverpod
-      sha256: e7f097159b9512f5953ff544164c19057f45ce28fd0cb971fc4cad1f7b28217d
+      sha256: "59a48de9c757aa61aa28e9fd625ffb360d43b6b54606f12536622c55be9e8c4b"
       url: "https://pub.dev"
     source: hosted
-    version: "1.0.3"
+    version: "2.2.0"
   shelf:
     dependency: transitive
     description:
@@ -561,10 +561,10 @@ packages:
     dependency: transitive
     description:
       name: state_notifier
-      sha256: "46d90938173c1166ea5b2a436675441c2ed0582694ef817f5f2659d448e507bf"
+      sha256: "8fe42610f179b843b12371e40db58c9444f8757f8b69d181c97e50787caed289"
       url: "https://pub.dev"
     source: hosted
-    version: "0.7.1"
+    version: "0.7.2+1"
   stream_channel:
     dependency: transitive
     description:
@@ -671,4 +671,4 @@ packages:
     version: "3.1.0"
 sdks:
   dart: ">=2.19.2 <3.0.0"
-  flutter: ">=2.12.0"
+  flutter: ">=3.0.0"

@@ -22,7 +22,7 @@ void main() {
     final container = ProviderContainer(overrides: [
       apiServiceProvider.overrideWithValue(api),
     ]);
-    target = PostRepositoryImpl(container.read);
+    target = container.read(postRepositoryProvider);
   });
 
   group('fetch', () {

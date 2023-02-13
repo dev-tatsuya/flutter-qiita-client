@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_qiita_client/presentation/base/base_page.dart';
 import 'package:flutter_qiita_client/presentation/common/widget/last_indicator.dart';
 import 'package:flutter_qiita_client/presentation/common/widget/search_bar.dart';
-import 'package:flutter_qiita_client/presentation/post/post_list_controller.dart';
+import 'package:flutter_qiita_client/presentation/post/post_list_notifier.dart';
 import 'package:flutter_qiita_client/presentation/post/state/post_list_state.dart';
 import 'package:flutter_qiita_client/presentation/post/widget/post_content.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -16,7 +16,7 @@ class PostListPage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final posts = state.posts;
-    final controller = ref.read(postListControllerProvider.notifier);
+    final controller = ref.read(postListNotifierProvider.notifier);
 
     return PrimaryScrollController(
       controller: ref.watch(postListScrollControllerProvider),

@@ -6,23 +6,23 @@ import 'package:flutter_qiita_client/presentation/post/state/post_list_state.dar
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-final postListControllerProvider =
-    StateNotifierProvider<PostListController, PostListState>(
-        (ref) => PostListController(ref.read));
+final postListNotifierProvider =
+    StateNotifierProvider<PostListNotifier, PostListState>(
+        (ref) => PostListNotifier(ref));
 
-class PostListController extends StateNotifier<PostListState> {
-  PostListController(this._read) : super(const PostListState()) {
+class PostListNotifier extends StateNotifier<PostListState> {
+  PostListNotifier(this._ref) : super(const PostListState()) {
     fetch(showDialog: true);
   }
 
   @visibleForTesting
-  PostListController.withDefaultValue(
+  PostListNotifier.withDefaultValue(
     PostListState state,
-    this._read,
+    this._ref,
   ) : super(state);
 
-  final Reader _read;
-  PostRepository get _repo => _read(postRepositoryProvider);
+  final Ref _ref;
+  PostRepository get _repo => _ref.read(postRepositoryProvider);
 
   static const perPage = 10;
 

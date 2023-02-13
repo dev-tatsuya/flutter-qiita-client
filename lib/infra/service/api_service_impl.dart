@@ -6,15 +6,14 @@ import 'package:flutter_qiita_client/infra/service/api/data_model/response/qiita
 import 'package:flutter_qiita_client/infra/service/api/qiita_api.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-final apiServiceProvider =
-    Provider<ApiService>((ref) => ApiServiceImpl(ref.read));
+final apiServiceProvider = Provider<ApiService>((ref) => ApiServiceImpl(ref));
 
 class ApiServiceImpl implements ApiService {
-  ApiServiceImpl(this._read);
+  ApiServiceImpl(this._ref);
 
-  final Reader _read;
-  QiitaApi get _api => _read(qiitaApiProvider);
-  ApiResponseFactory get _factory => _read(apiResponseFactoryProvider);
+  final Ref _ref;
+  QiitaApi get _api => _ref.read(qiitaApiProvider);
+  ApiResponseFactory get _factory => _ref.read(apiResponseFactoryProvider);
 
   @override
   Future<ApiResponse<List<QiitaPostResponse>>> getItems({

@@ -7,13 +7,13 @@ import 'package:flutter_qiita_client/infra/service/api_service_impl.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 final postRepositoryProvider =
-    Provider<PostRepository>((ref) => PostRepositoryImpl(ref.read));
+    Provider<PostRepository>((ref) => PostRepositoryImpl(ref));
 
 class PostRepositoryImpl implements PostRepository {
-  PostRepositoryImpl(this._read);
-  final Reader _read;
+  PostRepositoryImpl(this._ref);
+  final Ref _ref;
 
-  ApiService get _api => _read(apiServiceProvider);
+  ApiService get _api => _ref.read(apiServiceProvider);
 
   @override
   Future<List<QiitaPost>> fetch({

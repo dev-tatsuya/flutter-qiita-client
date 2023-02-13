@@ -1,6 +1,6 @@
 import 'package:flutter_qiita_client/presentation/common/state/page_state.dart';
 import 'package:flutter_qiita_client/presentation/post/connected_post_list_page.dart';
-import 'package:flutter_qiita_client/presentation/post/post_list_controller.dart';
+import 'package:flutter_qiita_client/presentation/post/post_list_notifier.dart';
 import 'package:flutter_qiita_client/presentation/post/state/post_list_state.dart';
 import 'package:golden_toolkit/golden_toolkit.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -20,9 +20,8 @@ void main() {
       ..addScenario(
         widget: ProviderScope(
           overrides: [
-            postListControllerProvider.overrideWithValue(
-                PostListController.withDefaultValue(
-                    state, ProviderContainer().read)),
+            postListNotifierProvider.overrideWith(
+                (ref) => PostListNotifier.withDefaultValue(state, ref)),
           ],
           child: materialWrapper(
             const ConnectedPostListPage(),
