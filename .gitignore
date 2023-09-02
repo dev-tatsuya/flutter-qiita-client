@@ -48,3 +48,4 @@ app.*.map.json
 .env
 .fvm/flutter_sdk
 **/failures/*.png
+coverage

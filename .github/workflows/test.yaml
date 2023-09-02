@@ -1,0 +1,30 @@
+name: Flutter CI
+
+on:
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    env:
+      TZ: 'Asia/Tokyo'
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Setup Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: '3.7.3'
+
+      - name: Install dependencies
+        run: flutter pub get
+
+      - name: touch file
+        run: touch .env
+
+      - name: Run Flutter tests and generate coverage
+        run: flutter test --coverage
+
+      - name: Run octocov
+        uses: k1LoW/octocov-action@v0.50.1
