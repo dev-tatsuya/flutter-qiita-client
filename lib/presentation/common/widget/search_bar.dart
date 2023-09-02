@@ -2,14 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_qiita_client/presentation/post/post_list_notifier.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-class SearchBar extends ConsumerStatefulWidget {
-  const SearchBar({Key? key}) : super(key: key);
+class ListSearchBar extends ConsumerStatefulWidget {
+  const ListSearchBar({Key? key}) : super(key: key);
 
   @override
   SearchFormState createState() => SearchFormState();
 }
 
-class SearchFormState extends ConsumerState<SearchBar> {
+class SearchFormState extends ConsumerState<ListSearchBar> {
   late TextEditingController controller;
 
   @override
