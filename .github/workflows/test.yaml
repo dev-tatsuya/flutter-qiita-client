@@ -26,22 +26,5 @@ jobs:
       - name: Run Flutter tests and generate coverage
         run: flutter test --coverage
 
-      - name: Install GitHub CLI
-        run: sudo apt-get install -y gh
-
-      - name: Comment PR with test coverage
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-#        run: |
-#          COVERAGE=$(cat coverage/lcov.info)  # Flutter generates lcov.info file by default
-#          PR_NUMBER=$(echo $GITHUB_REF | awk 'BEGIN { FS = "/" } ; { print $3 }')
-#          COMMENT="## Test Coverage Report\n\`\`\`\n$COVERAGE\n\`\`\`"
-#          echo $COMMENT
-#          echo $COMMENT > comment.txt
-#          gh pr comment $PR_NUMBER --body-file comment.txt
-        run: |
-          SUMMARY=$(lcov --summary coverage/lcov.info --no-filename 2>&1)
-          PR_NUMBER=$(gh pr view --json number -q '.number')
-          COMMENT="## Test Coverage Summary\n\`\`\`\n$SUMMARY\n\`\`\`"
-          echo "$COMMENT"
-          gh pr comment "$PR_NUMBER" --body "$COMMENT"
+      - name: Run octocov
+        uses: k1LoW/octocov-action@v0.50.1
