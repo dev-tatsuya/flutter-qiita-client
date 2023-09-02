@@ -19,6 +19,9 @@ jobs:
       - name: Install dependencies
         run: flutter pub get
 
+      - name: touch file
+        run: touch .env
+
       - name: Run Flutter tests and generate coverage
         run: flutter test --coverage
 
