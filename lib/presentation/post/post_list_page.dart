@@ -28,7 +28,7 @@ class PostListPage extends ConsumerWidget {
               elevation: 0.5,
               bottom: PreferredSize(
                 preferredSize: Size.fromHeight(4),
-                child: SearchBar(),
+                child: ListSearchBar(),
               ),
             ),
             CupertinoSliverRefreshControl(
