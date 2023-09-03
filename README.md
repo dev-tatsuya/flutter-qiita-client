@@ -1,7 +1,5 @@
 # Flutter Qiita Client
 
-![coverage](docs/coverage.svg) ![coverage](docs/ratio.svg) ![coverage](docs/time.svg)
-
 ## このリポジトリに関する記事
 [[Flutter] Riverpodで状態管理した一覧画面テンプレートとそのアーキテクチャ例](https://zenn.dev/dev_tatsuya/articles/cffaa7c50dfad7)
 
