@@ -41,11 +41,25 @@ jobs:
       - name: Build
         run: flutter build ios --debug --simulator
 
+      - name: Create upload name
+        id: upload-name
+        uses: actions/github-script@v6
+        env:
+          ISSUE_REF: ${{ steps.find-ref.outputs.head_ref }}
+        with:
+          script: |
+            const issueRef = process.env.ISSUE_REF;
+            const issueNumber = context.issue.number;
+            return `#${issueNumber}:${issueRef}`;
+          result-encoding: string
+
       - name: Upload to Maestro Cloud
         uses: mobile-dev-inc/action-maestro-cloud@v1.5.0
+        id: upload
         with:
           api-key: ${{ secrets.MAESTRO_CLOUD_API_KEY }}
           app-file: build/ios/iphonesimulator/Runner.app
+          name: ${{ steps.upload-name.outputs.result }}
 
       - name: Comment to PR when finishing uploading to Maestro Cloud
         uses: actions/github-script@v6
