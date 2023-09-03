@@ -1,6 +1,7 @@
 name: Command Maestro
 
 on:
+  pull_request:
   issue_comment:
     types: [created, edited]
 
