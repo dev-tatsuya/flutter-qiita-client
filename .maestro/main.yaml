@@ -1,0 +1,6 @@
+appId: com.example.flutterQiitaClient
+---
+- launchApp:
+    clearState: true
+
+- scroll
