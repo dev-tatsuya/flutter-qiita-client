@@ -39,10 +39,10 @@ jobs:
         run: touch .env
 
       - name: Build
-      - run: flutter build ios --debug --simulator
+        run: flutter build ios --debug --simulator
 
       - name: Upload to Maestro Cloud
-      - uses: mobile-dev-inc/action-maestro-cloud@v1.5.0
+        uses: mobile-dev-inc/action-maestro-cloud@v1.5.0
         with:
           api-key: ${{ secrets.MAESTRO_CLOUD_API_KEY }}
           app-file: build/ios/iphonesimulator/Runner.app
