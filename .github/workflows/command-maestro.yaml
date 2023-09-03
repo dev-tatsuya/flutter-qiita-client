@@ -1,0 +1,63 @@
+name: Command Maestro
+
+on:
+  issue_comment:
+    types: [created, edited]
+
+jobs:
+  maestro:
+    if: |
+      github.event.issue.pull_request &&
+      github.event.comment.body == '/e2e'
+    runs-on: macos-13
+    steps:
+      - name: Slash Commands
+        uses: xt0rted/slash-command-action@v2.0.0
+        id: command
+        with:
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
+          command: e2e
+
+      - name: Pull Request Comment Branch
+        uses: xt0rted/pull-request-comment-branch@v2.0.0
+        id: find-ref
+
+      - name: Checkout
+        uses: actions/checkout@v3.6.0
+        with:
+          ref: ${{ steps.find-ref.outputs.head_ref }}
+
+      - name: Setup Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: '3.13.2'
+
+      - name: Install dependencies
+        run: flutter pub get
+
+      - name: Create file
+        run: touch .env
+
+      - name: Build
+      - run: flutter build ios --debug --simulator
+
+      - name: Upload to Maestro Cloud
+      - uses: mobile-dev-inc/action-maestro-cloud@v1.5.0
+        with:
+          api-key: ${{ secrets.MAESTRO_CLOUD_API_KEY }}
+          app-file: build/ios/iphonesimulator/Runner.app
+
+      - name: Comment to PR when finishing uploading to Maestro Cloud
+        uses: actions/github-script@v6
+        with:
+          script: |
+            github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body:
+                '`/e2e` の実行が完了しました。\n' +
+                'Console URL: ${{ steps.upload.outputs.MAESTRO_CLOUD_CONSOLE_URL }}\n' +
+                'Flow Results: ${{ steps.upload.outputs.MAESTRO_CLOUD_FLOW_RESULTS }}\n' +
+                'Upload Status: ${{ steps.upload.outputs.MAESTRO_CLOUD_UPLOAD_STATUS }}'
+            })
