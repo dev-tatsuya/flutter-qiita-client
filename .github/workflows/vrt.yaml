@@ -77,10 +77,10 @@ jobs:
           name: reg-expected
           path: .reg/
 
-      - name: Use Node.js v10
+      - name: Use Node.js v16
         uses: actions/setup-node@v1
         with:
-          node-version: "10.x"
+          node-version: "16.x"
       - name: npm install, build, and test
         run: |
           npm i
@@ -101,7 +101,7 @@ jobs:
         run: touch .env
 
       - name: Create goldens
-        run: flutter test --update-goldens
+        run: flutter test --update-goldens --tags=golden
 
       - name: Copy golden files
         run: |

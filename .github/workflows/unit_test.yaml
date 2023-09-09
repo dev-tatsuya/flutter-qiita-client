@@ -25,7 +25,7 @@ jobs:
         run: touch .env
 
       - name: Run Flutter tests and generate coverage
-        run: flutter test --coverage
+        run: flutter test --coverage --exclude-tags=golden
 
       - name: Run octocov
         uses: k1LoW/octocov-action@v0.50.1
