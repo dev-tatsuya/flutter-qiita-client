@@ -18,7 +18,7 @@ final mockQiitaPosts = [
     DateTime(2022, 1, 15),
     10,
     [Tag('Flutter'), Tag('Dart'), Tag('Firebase')],
-    'Flutter Qiita Clientを作ってみた',
+    'Flutter Qiita Clientを作ってみたよ！',
     'url',
     QiitaUser('qiita_id', ''),
   ),
