@@ -9,11 +9,11 @@
 → `flutter run`
 
 ## Flutter SDK バージョン
-Flutter: 2.8.0
-Dart: 2.15.0
+Flutter: 3.13.2
+Dart: 3.1.0
 
-fvmを用いて管理しているため、ローカルマシンのFlutter SDKが2.8.0ではない場合、
-2.8.0に変更するもしくは、fvmを利用することで起動することができる。
+fvmを用いて管理しているため、ローカルマシンのFlutter SDKが 3.13.2 ではない場合、
+3.13.2 に変更するもしくは、fvmを利用することで起動することができる。
 
 ### fvm導入方法
 #### 1. fvmのインストール
@@ -24,7 +24,4 @@ fvmを用いて管理しているため、ローカルマシンのFlutter SDKが
 `$ export PATH=$PATH:$HOME/.pub-cache/bin`
 
 #### 3. 2.8.0をインストールする
-`fvm install 2.8.0`
-
-#### 4. 2.8.0を使用する（プロジェクト配下で）
-`fvm use 2.8.0`
+`fvm install`
