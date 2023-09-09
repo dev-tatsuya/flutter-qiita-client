@@ -17,10 +17,6 @@ jobs:
         with:
           ref: ${{ github.base_ref }}
           fetch-depth: 0
-      - uses: pnpm/action-setup@v2
-        with:
-          version: latest
-          run_install: true
 
       - name: Check commit hash
         id: commithash
@@ -40,9 +36,32 @@ jobs:
         with:
           files: '.reg/'
 
+      # スクリーンショットがなければ生成する
+      - name: Use Node.js v16
+        if: steps.check_files.outputs.files_exists == 'false'
+        uses: actions/setup-node@v1
+        with:
+          node-version: "16.x"
+      - name: Setup Flutter
+        if: steps.check_files.outputs.files_exists == 'false'
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: '3.13.2'
+      - name: run reg-suit
+        if: steps.check_files.outputs.files_exists == 'false'
+        run: |
+          flutter pub get
+          touch .env
+          flutter test --update-goldens --tags=golden
+          mkdir -p screenshots/
+          cp -r test/**/goldens/* screenshots/
+          npm i
+          npx reg-suit run
+          rm -rf .reg/expected/
+          mv -f .reg/actual/ .reg/expected/
+
       # PR branch との比較用にアップロード
       - name: Upload .reg/
-        if: steps.check_files.outputs.files_exists == 'true'
         uses: actions/upload-artifact@v3
         with:
           name: reg-expected
@@ -62,16 +81,8 @@ jobs:
         with:
           fetch-depth: 0
 
-      # スクリーンショット存在チェック
-      - name: Check file existence
-        id: check_files
-        uses: andstor/file-existence-action@20b4d2e596410855db8f9ca21e96fbe18e12930b # v2.0.0
-        with:
-          files: '.reg/'
-
       # Base branch のスクリーンショットを取得
       - name: Download reg-suit from base branch
-        if: steps.check_files.outputs.files_exists == 'true'
         uses: actions/download-artifact@v3
         with:
           name: reg-expected
