@@ -1,0 +1,7 @@
+{
+  "devDependencies": {
+    "reg-keygen-git-hash-plugin": "^0.12.2",
+    "reg-notify-github-plugin": "^0.12.2",
+    "reg-suit": "^0.12.2"
+  }
+}

@@ -49,3 +49,5 @@ app.*.map.json
 .fvm/flutter_sdk
 **/failures/*.png
 coverage
+.reg
+node_modules
