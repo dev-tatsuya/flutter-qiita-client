@@ -1,7 +1,7 @@
 {
   "core": {
     "workingDir": ".reg",
-    "actualDir": "test/**/goldens/",
+    "actualDir": "screenshots/",
     "thresholdRate": 0,
     "addIgnore": true,
     "ximgdiff": {
