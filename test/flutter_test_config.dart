@@ -9,34 +9,15 @@ Future<void> testExecutable(FutureOr<void> Function() testMain) async {
       await loadAppFonts();
       await testMain();
     },
-    config: GoldenToolkitConfiguration(
-      enableRealShadows: true,
-    ),
+    config: GoldenToolkitConfiguration(),
   );
 }
-
-// List<LocalizationsDelegate<dynamic>> localizationsDelegates() {
-//   return [
-//     GlobalMaterialLocalizations.delegate,
-//     GlobalCupertinoLocalizations.delegate,
-//     GlobalWidgetsLocalizations.delegate,
-//   ];
-// }
-//
-// List<Locale> supportedLocales() {
-//   return [
-//     const Locale('ja'),
-//   ];
-// }
 
 MaterialApp materialWrapper(Widget widget) => MaterialApp(
       theme: ThemeData(
         primarySwatch: Colors.green,
         fontFamily: 'Noto Sans JP',
       ),
-      // localizationsDelegates: localizationsDelegates(),
-      // supportedLocales: supportedLocales(),
-      // locale: const Locale('ja'),
       home: widget,
       debugShowCheckedModeBanner: false,
     );
