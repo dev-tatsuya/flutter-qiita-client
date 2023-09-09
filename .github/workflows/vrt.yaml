@@ -31,6 +31,7 @@ jobs:
               owner: context.repo.owner,
               repo: context.repo.repo,
               body:
-                'GitHub Pages へのデプロイが完了しました！\n' +
+                'GitHub Pages へのデプロイを開始しました！\n' +
+                '反映までに 15 分ほどかかる場合があります。\n' +
                 ' - https://dev-tatsuya.github.io/flutter-qiita-client/pr-reg-suit/pr-${{ github.event.pull_request.number }}/'
             })
