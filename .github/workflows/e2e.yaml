@@ -1,4 +1,4 @@
-name: Command Maestro
+name: E2E Test
 
 on:
   issue_comment:

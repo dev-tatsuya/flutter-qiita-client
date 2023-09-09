@@ -1,0 +1,36 @@
+name: Visual Regression Test
+
+on:
+  pull_request:
+    types: [opened, synchronize, closed]
+
+jobs:
+  deploy_ghpages:
+    if: github.event.action != 'closed'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
+      - name: Deploy to GitHub Pages
+        uses: JamesIves/github-pages-deploy-action@v4.4.3
+        with:
+          folder: public/
+          target-folder: '/pr-reg-suit/pr-${{ github.event.pull_request.number }}/'
+          branch: gh-pages
+          clean: false
+
+      - name: Comment to PR when finishing to deploy
+        uses: actions/github-script@v6
+        with:
+          script: |
+            github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body:
+                'GitHub Pages へのデプロイが完了しました！\n' +
+                ' - https://dev-tatsuya.github.io/flutter-qiita-client/pr-reg-suit/pr-${{ github.event.pull_request.number }}/'
+            })
