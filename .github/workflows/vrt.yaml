@@ -2,14 +2,24 @@ name: Visual Regression Test
 
 on:
   pull_request:
-    types: [opened, synchronize, closed]
+    types: [opened, closed]
+    paths:
+      - '**.dart'
+      - '**/pubspec.yaml'
+      - '**/pubspec.lock'
+      - '**/assets/**'
+
+  issue_comment:
+    types: [created]
 
 jobs:
 
   # Base branch のスクリーンショットを取得
   reg-suit-prepare:
     name: Prepare base branch screenshots
-    if: github.event.action != 'closed'
+    if: | 
+      (github.event.action == 'opened') ||
+      (github.event.issue.pull_request && github.event.comment.body == '/vrt')
     runs-on: ubuntu-latest
     steps:
       - name: Checkout base branch
@@ -71,7 +81,9 @@ jobs:
   reg-suit-run:
     name: Run reg-suit
     needs: reg-suit-prepare
-    if: github.event.action != 'closed'
+    if: |
+      (github.event.action == 'opened') ||
+      (github.event.issue.pull_request && github.event.comment.body == '/vrt')
     runs-on: ubuntu-latest
     env:
       TZ: 'Asia/Tokyo'
