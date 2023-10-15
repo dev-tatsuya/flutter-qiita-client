@@ -36,7 +36,7 @@ final mockQiitaPosts = [
     DateTime(2023, 1, 13),
     6,
     [Tag('PM'), Tag('アジャイル'), Tag('スクラム')],
-    'PMはじめました',
+    'PMOはじめました',
     'url',
     QiitaUser('qiita_id', ''),
   )
